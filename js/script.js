@@ -338,8 +338,8 @@ const ShortcutsModule = {
     this.shortcuts.forEach((item, index) => {
       // Clean domain URL for Google Favicon extractor fallback
       const domain = item.url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
-      const faviconUrl = item.icon && item.icon.trim() !== "" 
-        ? item.icon 
+      const faviconUrl = item.icon && item.icon.trim() !== ""
+        ? item.icon
         : `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
       const card = document.createElement('div');
@@ -348,14 +348,14 @@ const ShortcutsModule = {
       card.setAttribute('role', 'link');
       card.setAttribute('aria-label', `Open ${item.title}`);
 
-      // Click to open URL in new tab
+      // Click to open URL in same tab
       card.addEventListener('click', (e) => {
         // Prevent action if clicked edit button
         if (e.target.closest('.edit-btn-click')) return;
         card.classList.add('active-shortcut-click');
         setTimeout(() => {
           card.classList.remove('active-shortcut-click');
-          window.open(item.url, '_blank', 'noopener,noreferrer');
+          window.location.href = item.url;
         }, 120);
       });
 
@@ -363,7 +363,7 @@ const ShortcutsModule = {
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          window.open(item.url, '_blank', 'noopener,noreferrer');
+          window.location.href = item.url;
         }
       });
 
@@ -528,22 +528,22 @@ const AppsLauncherModule = {
     this.searchInput = document.getElementById('apps-search-input');
     this.clearSearchBtn = document.getElementById('clear-apps-search-btn');
     this.scrollContainer = document.getElementById('apps-scroll-container');
-    
+
     this.favoritesGrid = document.getElementById('apps-favorites-grid');
     this.favoritesSection = document.getElementById('apps-favorites-section');
     this.allGrid = document.getElementById('apps-all-grid');
     this.restoreBtn = document.getElementById('restore-hidden-apps-btn');
-    
+
     this.apps = CONFIG.googleApps || [];
-    
+
     // Load local storage states
     this.pinnedApps = Storage.get('apps_pinned', ['search', 'gmail', 'drive', 'youtube']);
     this.hiddenApps = Storage.get('apps_hidden', []);
-    
+
     // Load app order or default
     const defaultOrder = this.apps.map(a => a.id);
     this.appOrder = Storage.get('apps_order', defaultOrder);
-    
+
     // Align order in case config apps list changed
     this.appOrder = this.appOrder.filter(id => defaultOrder.includes(id));
     defaultOrder.forEach(id => {
@@ -551,14 +551,14 @@ const AppsLauncherModule = {
         this.appOrder.push(id);
       }
     });
-    
+
     this.searchQuery = Storage.get('apps_search_query', '');
-    
+
     // Bind modal actions
     this.btn.addEventListener('click', () => this.openModal());
     this.closeBtn.addEventListener('click', () => this.closeModal());
     this.overlay.addEventListener('click', () => this.closeModal());
-    
+
     // Bind search actions
     this.searchInput.value = this.searchQuery;
     this.searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));
@@ -567,34 +567,34 @@ const AppsLauncherModule = {
       this.handleSearch('');
       this.searchInput.focus();
     });
-    
+
     // Bind restore action
     this.restoreBtn.addEventListener('click', () => this.restoreHidden());
-    
+
     this.render();
-    
+
     // Apply initial search filtering if search query was saved
     if (this.searchQuery) {
       this.handleSearch(this.searchQuery);
     }
   },
-  
+
   openModal() {
     this.modal.classList.remove('pointer-events-none');
     this.modal.classList.add('opacity-100');
     // autofocus search box
     setTimeout(() => this.searchInput.focus(), 150);
   },
-  
+
   closeModal() {
     this.modal.classList.add('pointer-events-none');
     this.modal.classList.remove('opacity-100');
   },
-  
+
   handleSearch(query) {
     this.searchQuery = query.trim();
     Storage.set('apps_search_query', this.searchQuery);
-    
+
     if (this.searchQuery !== '') {
       this.clearSearchBtn.classList.remove('opacity-0');
       this.clearSearchBtn.classList.add('opacity-100');
@@ -602,7 +602,7 @@ const AppsLauncherModule = {
       this.clearSearchBtn.classList.remove('opacity-100');
       this.clearSearchBtn.classList.add('opacity-0');
     }
-    
+
     // Filter cards in both grids
     const term = this.searchQuery.toLowerCase();
     const allCards = this.modal.querySelectorAll('[data-app-id]');
@@ -615,7 +615,7 @@ const AppsLauncherModule = {
       }
     });
   },
-  
+
   restoreHidden() {
     this.hiddenApps = [];
     Storage.set('apps_hidden', this.hiddenApps);
@@ -624,7 +624,7 @@ const AppsLauncherModule = {
       this.handleSearch(this.searchQuery);
     }
   },
-  
+
   togglePin(appId) {
     const idx = this.pinnedApps.indexOf(appId);
     if (idx > -1) {
@@ -638,7 +638,7 @@ const AppsLauncherModule = {
       this.handleSearch(this.searchQuery);
     }
   },
-  
+
   hideApp(appId) {
     if (!this.hiddenApps.includes(appId)) {
       this.hiddenApps.push(appId);
@@ -655,23 +655,23 @@ const AppsLauncherModule = {
       }
     }
   },
-  
+
   render() {
     this.favoritesGrid.innerHTML = '';
     this.allGrid.innerHTML = '';
-    
+
     // Toggle restore button visibility
     if (this.hiddenApps.length > 0) {
       this.restoreBtn.classList.remove('hidden');
     } else {
       this.restoreBtn.classList.add('hidden');
     }
-    
+
     // Sort all apps based on appOrder
     const sortedApps = [...this.apps].sort((a, b) => {
       return this.appOrder.indexOf(a.id) - this.appOrder.indexOf(b.id);
     });
-    
+
     // Sort favorites based on pinnedApps order
     const favoriteApps = [];
     this.pinnedApps.forEach(pinnedId => {
@@ -680,7 +680,7 @@ const AppsLauncherModule = {
         favoriteApps.push(app);
       }
     });
-    
+
     // Show/Hide Favorites section
     if (favoriteApps.length > 0) {
       this.favoritesSection.style.display = '';
@@ -691,7 +691,7 @@ const AppsLauncherModule = {
     } else {
       this.favoritesSection.style.display = 'none';
     }
-    
+
     // Render All Apps
     sortedApps.forEach(app => {
       if (!this.hiddenApps.includes(app.id)) {
@@ -700,15 +700,15 @@ const AppsLauncherModule = {
         this.allGrid.appendChild(card);
       }
     });
-    
+
     // Bind Drag & Drop Events
     this.setupDragAndDrop();
-    
+
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
     }
   },
-  
+
   createAppCard(app, isFavoriteGrid = false, isPinned = false) {
     const card = document.createElement('div');
     card.className = 'glass-card group relative p-2.5 flex flex-col items-center justify-center text-center cursor-pointer select-none';
@@ -717,10 +717,10 @@ const AppsLauncherModule = {
     card.setAttribute('tabindex', '0');
     card.setAttribute('role', 'link');
     card.setAttribute('aria-label', `Open ${app.name}`);
-    
+
     const faviconUrl = `https://www.google.com/s2/favicons?domain=${app.domain}&sz=64`;
     const starFilled = isFavoriteGrid || isPinned;
-    
+
     card.innerHTML = `
       <!-- Hover controls -->
       <div class="absolute top-1 right-1 flex items-center space-x-0.5 opacity-0 group-hover:opacity-100 transition-opacity z-20">
@@ -742,53 +742,53 @@ const AppsLauncherModule = {
       <!-- App Name -->
       <span class="app-title text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full text-white/90 group-hover:text-white pointer-events-none">${app.name}</span>
     `;
-    
-    // Click card opens link in new tab
+
+    // Click card opens link in same tab
     card.addEventListener('click', (e) => {
       if (e.target.closest('button')) return;
-      window.open(app.url, '_blank', 'noopener,noreferrer');
+      window.location.href = app.url;
     });
-    
+
     // Keyboard support
     card.addEventListener('keydown', (e) => {
       if (e.target.closest('button')) return;
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        window.open(app.url, '_blank', 'noopener,noreferrer');
+        window.location.href = app.url;
       }
     });
-    
+
     // Pin action click
     card.querySelector('.pin-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       this.togglePin(app.id);
     });
-    
+
     // Hide action click
     card.querySelector('.hide-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       this.hideApp(app.id);
     });
-    
+
     return card;
   },
-  
+
   setupDragAndDrop() {
     let draggedItem = null;
     const self = this;
-    
+
     const grids = [this.favoritesGrid, this.allGrid];
-    
+
     grids.forEach(grid => {
       const cards = grid.querySelectorAll('[draggable="true"]');
-      
+
       cards.forEach(card => {
         card.addEventListener('dragstart', (e) => {
           draggedItem = card;
           card.classList.add('app-card-dragging');
           e.dataTransfer.effectAllowed = 'move';
         });
-        
+
         card.addEventListener('dragend', () => {
           if (draggedItem) {
             draggedItem.classList.remove('app-card-dragging');
@@ -796,23 +796,23 @@ const AppsLauncherModule = {
           draggedItem = null;
           self.saveOrders();
         });
-        
+
         card.addEventListener('dragover', (e) => {
           e.preventDefault();
         });
-        
+
         card.addEventListener('dragenter', (e) => {
           e.preventDefault();
           if (draggedItem && draggedItem !== card) {
             const draggedGrid = draggedItem.parentNode;
             const targetGrid = card.parentNode;
-            
+
             // Reorder dynamically inside same grid container
             if (draggedGrid === targetGrid) {
               const children = Array.from(targetGrid.children);
               const draggedIndex = children.indexOf(draggedItem);
               const targetIndex = children.indexOf(card);
-              
+
               if (draggedIndex < targetIndex) {
                 targetGrid.insertBefore(draggedItem, card.nextSibling);
               } else {
@@ -824,27 +824,27 @@ const AppsLauncherModule = {
       });
     });
   },
-  
+
   saveOrders() {
     // Save favorites order
     const favoriteCards = Array.from(this.favoritesGrid.children);
     const newFavoritesOrder = favoriteCards.map(c => c.getAttribute('data-app-id'));
     this.pinnedApps = newFavoritesOrder;
     Storage.set('apps_pinned', this.pinnedApps);
-    
+
     // Save all apps order
     const allCards = Array.from(this.allGrid.children);
     const newAllOrder = allCards.map(c => c.getAttribute('data-app-id'));
-    
+
     const currentOrderSet = new Set(newAllOrder);
     const fullOrder = [...newAllOrder];
-    
+
     this.appOrder.forEach(id => {
       if (!currentOrderSet.has(id)) {
         fullOrder.push(id);
       }
     });
-    
+
     this.appOrder = fullOrder;
     Storage.set('apps_order', this.appOrder);
   }
