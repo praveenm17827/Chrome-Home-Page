@@ -1,0 +1,210 @@
+/*
+ * Premium Start Page - Custom CSS Stylesheet
+ * Incorporates VisionOS glassmorphism, Fluent Design, and cinematic animation systems.
+ */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: rgba(0, 0, 0, 0.25);
+  --glass-blur: 24px;
+  --glow-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Custom Reset & Scrollbar (Non-scrolling layout) */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  background-color: #030712; /* fallback deep black */
+}
+
+/* Primary Glassmorphism Class */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 40px 0 var(--glass-shadow);
+  border-radius: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Glass Card styling for shortcuts and minor panels */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 1rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover glow & scaling for standard elements */
+.hover-glow:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 24px 0 rgba(255, 255, 255, 0.1), 0 12px 40px 0 var(--glass-shadow);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.08), 0 10px 24px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Glass Input styling for Modals */
+.glass-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+
+/* Hero Card Dimensions & Responsive Widths */
+#hero-card {
+  width: 90vw;
+  max-width: 700px; /* Conforms to 700px - 900px desktop specification (more compact) */
+}
+
+@media (min-width: 1024px) {
+  #hero-card {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 640px) {
+  #hero-card {
+    width: 95vw;
+    padding: 1.25rem 1rem;
+  }
+}
+
+/* Profile Image sizes */
+#profile-img {
+  width: 220px; /* Maximized desktop size */
+  height: 220px;
+  border-radius: 9999px;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 1024px) {
+  #profile-img {
+    width: 170px; /* Maximized tablet size */
+    height: 170px;
+  }
+}
+
+@media (max-width: 640px) {
+  #profile-img {
+    width: 130px; /* Maximized mobile size */
+    height: 130px;
+  }
+}
+
+/* Google Search Input Overrides */
+#search-input {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+#search-input:focus {
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Ken Burns background zoom keyframes */
+.kenburns-active {
+  animation: kenburns 40s ease-out infinite alternate;
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate(0px, 0px);
+  }
+  100% {
+    transform: scale(1.08) translate(-10px, -5px);
+  }
+}
+
+/* Accessibility outlines */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 3px;
+}
+
+/* Smooth active zoom transitions */
+.active-shortcut-click {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+/* Entrance Animations */
+.slide-up-item {
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar for Apps Launcher Modal */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Dragging & Reorder Effects */
+.app-card-dragging {
+  opacity: 0.3;
+  transform: scale(0.9);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.drag-over-active {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  transform: scale(1.03);
+}
