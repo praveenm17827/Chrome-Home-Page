@@ -23,24 +23,52 @@ const CONFIG = {
     { title: "LinkedIn", url: "https://www.linkedin.com/in/praveenm1708/" },
     { title: "My Portfolio", url: "https://praveenmurugan.me/" },
     { title: "LeetCode", url: "https://leetcode.com/problemset/" },
-    { tilte: "Overleaf", url: "https://www.overleaf.com/project" },
+    { title: "Overleaf", url: "https://www.overleaf.com/project" },
     { title: "Gemini", url: "https://gemini.google.com/app?is_sa=1&is_sa=1&android-min-version=301356232&ios-min-version=322.0&campaign_id=bkws&utm_source=sem&utm_source=google&utm_medium=paid-media&utm_medium=cpc&utm_campaign=bkws&utm_campaign=2024enIN_gemfeb&pt=9008&mt=8&ct=p-growth-sem-bkws&gad_source=1&gclid=CjwKCAiA2cu9BhBhEiwAft6IxLDtie60dqbStE11pGlEa6ZU4XbU9q8jUchN3uWUCFB17H3gCm5dWhoCkqIQAvD_BwE&gclsrc=aw.ds" },
     { title: "Whatsapp", url: "https://web.whatsapp.com/" }
-
-
   ],
 
-  // Premium quotes for the Quote Widget
-  quotes: [
-    "Action is the foundational key to all success. — Pablo Picasso",
-    "Simplicity is the ultimate sophistication. — Leonardo da Vinci",
-    "The best way to predict the future is to invent it. — Alan Kay",
-    "Design is not just what it looks like and feels like. Design is how it works. — Steve Jobs",
-    "It always seems impossible until it's done. — Nelson Mandela",
-    "Focus on being productive instead of busy. — Tim Ferriss",
-    "Believe you can and you're halfway there. — Theodore Roosevelt",
-    "Your time is limited, so don't waste it living someone else's life. — Steve Jobs",
-    "Strive not to be a success, but rather to be of value. — Albert Einstein",
-    "Details make the design. — Charles Eames"
-  ]
+  // Google Apps configuration for the Google App Launcher (9-Dot Apps Menu)
+  googleApps: [
+    { id: "account", name: "Account", domain: "myaccount.google.com", url: "https://myaccount.google.com" },
+    { id: "search", name: "Search", domain: "google.com", url: "https://google.com" },
+    { id: "gmail", name: "Gmail", domain: "mail.google.com", url: "https://mail.google.com" },
+    { id: "youtube", name: "YouTube", domain: "youtube.com", url: "https://youtube.com" },
+    { id: "gemini", name: "Gemini", domain: "gemini.google.com", url: "https://gemini.google.com" },
+    { id: "maps", name: "Maps", domain: "maps.google.com", url: "https://maps.google.com" },
+    { id: "drive", name: "Drive", domain: "drive.google.com", url: "https://drive.google.com" },
+    { id: "calendar", name: "Calendar", domain: "calendar.google.com", url: "https://calendar.google.com" },
+    { id: "news", name: "News", domain: "news.google.com", url: "https://news.google.com" },
+    { id: "photos", name: "Photos", domain: "photos.google.com", url: "https://photos.google.com" },
+    { id: "meet", name: "Meet", domain: "meet.google.com", url: "https://meet.google.com" },
+    { id: "translate", name: "Translate", domain: "translate.google.com", url: "https://translate.google.com" },
+    { id: "slides", name: "Slides", domain: "slides.google.com", url: "https://slides.google.com" },
+    { id: "google-one", name: "Google One", domain: "one.google.com", url: "https://one.google.com" },
+    { id: "shopping", name: "Shopping", domain: "shopping.google.com", url: "https://shopping.google.com" },
+    { id: "store", name: "Store", domain: "store.google.com", url: "https://store.google.com" },
+    { id: "play", name: "Play", domain: "play.google.com", url: "https://play.google.com" },
+    { id: "finance", name: "Finance", domain: "finance.google.com", url: "https://finance.google.com" },
+    { id: "keep", name: "Keep", domain: "keep.google.com", url: "https://keep.google.com" },
+    { id: "my-ad-center", name: "My Ad Center", domain: "myadcenter.google.com", url: "https://myadcenter.google.com" },
+    { id: "classroom", name: "Classroom", domain: "classroom.google.com", url: "https://classroom.google.com" },
+    { id: "chat", name: "Chat", domain: "chat.google.com", url: "https://chat.google.com" },
+    { id: "earth", name: "Earth", domain: "earth.google.com", url: "https://earth.google.com" },
+    { id: "saved", name: "Saved", domain: "www.google.com/save", url: "https://www.google.com/save" },
+    { id: "arts-culture", name: "Arts & Culture", domain: "artsandculture.google.com", url: "https://artsandculture.google.com" },
+    { id: "google-ads", name: "Google Ads", domain: "ads.google.com", url: "https://ads.google.com" },
+    { id: "merchant-center", name: "Merchant Center", domain: "merchants.google.com", url: "https://merchants.google.com" },
+    { id: "contacts", name: "Contacts", domain: "contacts.google.com", url: "https://contacts.google.com" },
+    { id: "travel", name: "Travel", domain: "travel.google.com", url: "https://travel.google.com" },
+    { id: "forms", name: "Forms", domain: "forms.google.com", url: "https://forms.google.com" },
+    { id: "books", name: "Books", domain: "books.google.com", url: "https://books.google.com" },
+    { id: "chrome-web-store", name: "Chrome Web Store", domain: "chromewebstore.google.com", url: "https://chromewebstore.google.com" },
+    { id: "password-manager", name: "Password Manager", domain: "passwords.google.com", url: "https://passwords.google.com" },
+    { id: "google-analytics", name: "Google Analytics", domain: "analytics.google.com", url: "https://analytics.google.com" },
+    { id: "blogger", name: "Blogger", domain: "blogger.com", url: "https://blogger.com" },
+    { id: "youtube-music", name: "YouTube Music", domain: "music.youtube.com", url: "https://music.youtube.com" },
+    { id: "wallet", name: "Wallet", domain: "wallet.google.com", url: "https://wallet.google.com" },
+    { id: "notebooklm", name: "NotebookLM", domain: "notebooklm.google.com", url: "https://notebooklm.google.com" },
+    { id: "tasks", name: "Tasks", domain: "tasks.google.com", url: "https://tasks.google.com" },
+    { id: "docs", name: "Docs", domain: "docs.google.com", url: "https://docs.google.com/document/u/0/" }
+  ],
 };

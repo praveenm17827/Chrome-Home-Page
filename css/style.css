@@ -208,3 +208,114 @@ a:focus-visible {
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
   transform: scale(1.03);
 }
+
+/* ==========================================
+   SORTABLEJS & EDIT LAYOUT MODE STYLES
+   ========================================== */
+
+/* Subtle wiggling animation to show layout is editable */
+@keyframes card-wiggle {
+  0% { transform: rotate(-0.5deg) translateY(0); }
+  50% { transform: rotate(0.5deg) translateY(-0.5deg); }
+  100% { transform: rotate(-0.5deg) translateY(0); }
+}
+
+.edit-mode-active .glass-card {
+  animation: card-wiggle 0.25s ease-in-out infinite alternate;
+  border: 1px dashed rgba(255, 255, 255, 0.3) !important;
+  cursor: grab !important;
+  user-select: none;
+}
+
+/* Disable standard hover animations during edit mode */
+.edit-mode-active .glass-card:hover {
+  transform: none !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Dragging active state (the card being moved under the cursor) */
+.edit-mode-active .glass-card.sortable-chosen {
+  animation: none !important;
+  transform: scale(1.06) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  cursor: grabbing !important;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Ghost placeholder style (the drop target slot) */
+.sortable-ghost {
+  opacity: 0.35 !important;
+  transform: scale(0.92) !important;
+  border: 1.5px dashed rgba(255, 255, 255, 0.4) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+/* Active Edit Layout toggle button state */
+.edit-layout-active-btn {
+  background: rgba(245, 158, 11, 0.2) !important; /* Amber tint */
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.25) !important;
+  color: #fbbf24 !important; /* Amber text */
+}
+
+/* Grip handle visual indicator on cards */
+.edit-mode-active .glass-card::before {
+  content: '⋮⋮';
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  font-family: monospace;
+}
+
+/* Compact Google App Launcher styles */
+.launcher-app-card {
+  height: 86px !important;
+  padding: 8px !important;
+  border-radius: 12px !important;
+}
+
+.launcher-app-card .launcher-icon-container {
+  width: 32px !important;
+  height: 32px !important;
+  margin-bottom: 4px !important;
+  border-radius: 8px !important;
+}
+
+.launcher-app-card .launcher-icon-container img,
+.launcher-app-card .launcher-icon-container svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.launcher-app-card .app-title {
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+  font-weight: 500 !important;
+}
+
+@media (min-width: 640px) {
+  .launcher-app-card {
+    height: 94px !important;
+    padding: 10px !important;
+  }
+  .launcher-app-card .launcher-icon-container {
+    width: 38px !important;
+    height: 38px !important;
+    margin-bottom: 5px !important;
+  }
+  .launcher-app-card .launcher-icon-container img,
+  .launcher-app-card .launcher-icon-container svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .launcher-app-card .app-title {
+    font-size: 10px !important;
+  }
+}
